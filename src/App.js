@@ -8,6 +8,8 @@ function App() {
   //Definir el state
   const [cantidad, guardarCantidad] = useState(0);
   const [plazo, guardarPlazo] = useState('');
+  const [totals, guardarTotal] = useState(0);
+
   return (
     <Fragment>
       <Header
@@ -19,7 +21,10 @@ function App() {
           guardarCantidad={guardarCantidad}
           plazo={plazo}
           guardarPlazo={guardarPlazo}
+          totals={totals}
+          guardarTotal={guardarTotal}
         />
+        <p>Total a pagar: ${totals}</p>
       </div>
     </Fragment>
   );
