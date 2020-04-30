@@ -3,12 +3,30 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './componentes/Header'
 import Formulario from './componentes/Formulario'
+import Resultado from './componentes/Resultado';
+import Mensaje from './componentes/Mensaje';
+import Spinner from './componentes/Spinner';
+
 
 function App() {
   //Definir el state
   const [cantidad, guardarCantidad] = useState(0);
   const [plazo, guardarPlazo] = useState('');
-  const [totals, guardarTotal] = useState(0);
+  const [total, guardarTotal] = useState(0);
+  const [cargando, guardarCargando] = useState(false)
+
+  let mostrar;
+  if(cargando){
+    mostrar = <Spinner/>
+  }else if(total === 0){
+    mostrar = <Mensaje/>
+  }else{
+    mostrar = <Resultado
+                    total={total}
+                    plazo={plazo}
+                    cantidad={cantidad}
+                  />
+  }
 
   return (
     <Fragment>
@@ -21,10 +39,11 @@ function App() {
           guardarCantidad={guardarCantidad}
           plazo={plazo}
           guardarPlazo={guardarPlazo}
-          totals={totals}
+          totals={total}
           guardarTotal={guardarTotal}
+          guardarCargando = {guardarCargando}
         />
-        <p>Total a pagar: ${totals}</p>
+        <p>{mostrar}</p>
       </div>
     </Fragment>
   );
